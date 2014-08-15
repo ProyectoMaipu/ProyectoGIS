@@ -1,0 +1,29 @@
+﻿@model Proyecto.ViewModels.GeoViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCnVvFIubOsXOOIAcnQx0weuImKVpo6h_4&sensor=false">
+    </script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+@Html.TextBoxFor(m=>m.Direccion, new {name="Direccion" , id="Direccion" })
+<div id="mapa" style="height:900px;width:500px; "></div>
+
+<script type="text/JavaScript">
+    var geocoder, map, bounds, markers, lastMarker, temporal;
+    function initialize() {
+        var input = document.getElementById('Direccion');
+        var mapOptions = {
+            type:['geocode']
+        };
+        autocomplete = new google.maps.places.Autocomplete(input, mapOptions);
+        geocoder = new google.maps.Geocoder();
+        bounds = new google.maps.LatLngBounds();
+        //map = new google.maps.Map(document.getElementById("mapa"));
+
+    }
+        initialize();
+    </script>
+
