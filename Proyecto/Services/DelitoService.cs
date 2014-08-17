@@ -25,6 +25,11 @@ namespace Proyecto.Services
             return ProviderService.ExecuteNonQuery(String.Format(@"UPDATE delitos SET tipo_delito='{0}',  es_prevenible='{1}' WHERE id='{2}'",delito.tipo_delito ,delito.es_prevenible,delito.id);
         }
 
+        public static List<Delito> GetAll()
+        {
+            return ProviderService.ExecuteReaderDelito("SELECT delito id, tipo_delito, es_prevenible FROM DELITO ORDER BY 1 ASC");
+        }
+
 
     }
 }
