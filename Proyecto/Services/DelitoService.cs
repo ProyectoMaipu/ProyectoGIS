@@ -22,7 +22,7 @@ namespace Proyecto.Services
 
         public static bool ActualizarDelito(Delito delito)
         {
-            return ProviderService.ExecuteNonQuery(String.Format(@"UPDATE delitos SET tipo_delito='{0}',  es_prevenible='{1}' WHERE id='{2}'",delito.tipo_delito ,delito.es_prevenible,delito.id);
+            return ProviderService.ExecuteNonQuery(String.Format(@"UPDATE delitos SET tipo_delito='{0}',  es_prevenible='{1}' WHERE id='{2}'",delito.tipo_delito ,delito.es_prevenible,delito.id));
         }
 
         public static List<Delito> GetAll()
