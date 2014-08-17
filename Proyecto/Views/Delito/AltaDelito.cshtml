@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "DelitoView";
+}
+
+<h2>DelitoView</h2>
+<div style="margin-top: 10px">
+    <b>Tipo delito: </b><br/>
+    <input type="text" id="txt_TipoDelito" style="width: 300px" required/><br/>
+</div>
+<div style="margin-top: 10px">
+    <b>Es Prevenible</b><br/> 
+    <input type="text" id ="txt_EsPrevenible" style="width: 300px" required/> <br/>
+</div>
+<div style="margin-top: 20px">
+    <input type="button" class="btn btn-success" value="Alta Contenedor" onclick="altaDelito()"/>
+    <input type="button" class="btn btn-danger" value="Cancelar" onclick="closeDialog()"/>
+</div>
+<style>
+    .pac-container {
+    z-index: 1200 !important;
+}
+</style>
+
+<script>
+    function altaDelito() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AltaDelito")',
+            data: { AltaDelito: $("#txt_AltaDelito").val(),  EsPrevenible: $("#txt_EsPrevenible").val() },
+            dataType: "json",
+            success: function () {
+                $("#dialog").dialog("close");                
+            }
+        });
+    }
+
+    function closeDialog() {
+        $("#dialog").dialog("close");
+    }
+</script>

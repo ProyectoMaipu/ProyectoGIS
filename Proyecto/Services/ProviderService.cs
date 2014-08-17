@@ -6,12 +6,13 @@ namespace Proyecto.Service
 {
     public class ProviderService
     {
-        const string ConnectionString = "server=192.168.0.7;port=5432;database=PracticoGIS;user id=postgres; Password=postgres";
+        const string ConnectionString = "server=192.168.0.9;port=5432;database=Proyecto;user id=postgres; Password=postgres";
 
         public static bool ExecuteNonQuery(string comando)
         {
             var conn = new NpgsqlConnection(ConnectionString);
             conn.Open();
+            comando = "INSERT INTO delitos (tipo_delito, es_prevenible) VALUES (3, 'N')";
             var command = new NpgsqlCommand(comando, conn);
             var filasCreadas = command.ExecuteNonQuery();
             conn.Close();
