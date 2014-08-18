@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto.ViewModels;
 using Proyecto.Services;
+using AutoMapper;
+using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
@@ -24,11 +26,22 @@ namespace Proyecto.Controllers
             var viewModel = new EventoViewModel();
             var delitoService = new TipoDelitoService();
             viewModel.TiposDelitos = delitoService.GetAll();
+
             return View(viewModel);
         }
 
         //
         // GET: /Evento/Details/5
+
+        public ActionResult Alta()
+        {
+            Mapper.CreateMap<Evento, EventoViewModel>();
+            var viewModel = new EventoViewModel();
+            var delitoService = new TipoDelitoService();
+            viewModel=Mapper.Map<EventoViewModel>(new Evento());
+            viewModel.TiposDelitos = delitoService.GetAll();
+            return View(viewModel);
+        }
 
         public ActionResult Details(int id)
         {
@@ -73,17 +86,34 @@ namespace Proyecto.Controllers
         // POST: /Evento/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult GuardarEvento(EventoViewModel vm)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                try
+                {
+                    Mapper.CreateMap<EventoViewModel, Evento>();
+                    var evento = Mapper.Map<Evento>(vm);
+                    var eService = new EventoService();
+                    eService.AltaEvento(evento);
+                    // TODO: Add update logic here
+                    var delitoService = new TipoDelitoService();
+                    vm.TiposDelitos = delitoService.GetAll();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    var delitoService = new TipoDelitoService();
+                    vm.TiposDelitos = delitoService.GetAll();
+                    return View("Alta", vm);
+                }
             }
-            catch
+            else
             {
-                return View();
+                var delitoServices = new TipoDelitoService();
+                vm.TiposDelitos = delitoServices.GetAll();
+                return View("Alta", vm);
             }
         }
 

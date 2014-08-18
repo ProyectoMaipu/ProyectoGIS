@@ -13,9 +13,9 @@ namespace Proyecto.Services
         public readonly IProviderService _providerService;
         //
         // GET: /TipoDelito/
-        public EventoService(IProviderService providerService)
+        public EventoService()
         {
-            _providerService = providerService;
+          var _providerService = new ProviderService();
         }
 
         public bool AltaEvento(Evento evento)

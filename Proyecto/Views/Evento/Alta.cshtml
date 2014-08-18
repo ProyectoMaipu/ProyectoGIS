@@ -1,0 +1,117 @@
+﻿@model Proyecto.ViewModels.EventoViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@*<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>*@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCnVvFIubOsXOOIAcnQx0weuImKVpo6h_4&sensor=false"></script>
+
+<div id="mapa" style="height:500px;width:500px; "></div>
+<script src="/Scripts/jquery-1.9.1.js"></script>
+<script src="/Scripts/bootstrap.min.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
+@using (Html.BeginForm("GuardarEvento","Evento",FormMethod.Post,new{id="altaForm"})){
+
+@Html.ValidationSummary()
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Direccion)
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Direccion, new { name = "Direccion", id = "Direccion" })
+        </div>
+         <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.Direccion)
+     </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Fecha)
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Fecha, new { name = "Direccion", id = "Direccion" })
+        </div>
+                 <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.Fecha)
+     </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Victimas)
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Victimas, new { name = "Direccion", id = "Direccion" })
+        </div>
+    <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.Victimas)
+     </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Denunciante)
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Denunciante, new { name = "Direccion", id = "Direccion" })
+        </div>
+            <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.Denunciante)
+     </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.TipoDelitoId)
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(m => m.TipoDelitoId, new SelectList(Model.TiposDelitos, "Id", "Nombre", Model.TipoDelitoId), new { })
+        </div>
+    <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.TipoDelitoId)
+     </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Detalle)
+        </div>
+        <div class="col-md-5">
+            @Html.TextAreaFor(m=>m.Detalle, new { name = "Direccion", id = "Direccion" })
+        </div>
+            <div class="col-md-5">
+             @Html.ValidationMessageFor(m=>m.Detalle)
+     </div>
+    </div>
+</div>
+    
+    <button type="submit" value="Guardar" name="Guardar">Guardar Evento</button>
+}
+
+<script type="text/JavaScript">
+    var geocoder, map, bounds, markers, lastMarker, temporal;
+    function initialize() {
+        var input = document.getElementById('Direccion');
+        var options = {
+            types: ['geocode'],
+            location: ['-35.173728, -58.234451'],
+            radius: ['20000']
+        };
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        var mapOptions = {
+            center: new google.maps.LatLng(-35.173728, -58.234451),
+            radius:20000,
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
+    }
+
+    $('#Direccion').on('change')
+    {
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
