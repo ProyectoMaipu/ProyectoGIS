@@ -15,12 +15,23 @@ namespace Proyecto.Controllers
 
         public ActionResult Index()
         {
+            var caca = DelitoService.GetAll();
             return View();
         }
 
         public ActionResult AltaDelito(Delito delito)
         {
             return Json(DelitoService.AltaDelito(delito), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult BajaDelito(Delito delito)
+        {
+            return Json(DelitoService.BajaDelito(delito.id), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ActualizarDelito(Delito delito)
+        {
+            return Json(DelitoService.ActualizarDelito(delito), JsonRequestBehavior.AllowGet);
         }
 
     }

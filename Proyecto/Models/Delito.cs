@@ -9,6 +9,6 @@ namespace Proyecto.Models
     {
         public int id { get; set; }
         public int tipo_delito { get; set; }
-        public char es_prevenible { get; set; }
+        public bool es_prevenible { get; set; }
     }
 }

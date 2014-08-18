@@ -12,7 +12,6 @@ namespace Proyecto.Service
         {
             var conn = new NpgsqlConnection(ConnectionString);
             conn.Open();
-            comando = "INSERT INTO delitos (tipo_delito, es_prevenible) VALUES (3, 'N')";
             var command = new NpgsqlCommand(comando, conn);
             var filasCreadas = command.ExecuteNonQuery();
             conn.Close();
@@ -31,8 +30,9 @@ namespace Proyecto.Service
             {
                 lista.Add(new Delito()
                 {
+                    id = dataReader.GetInt32(dataReader.GetOrdinal("id")),
                     tipo_delito = dataReader.GetInt32(dataReader.GetOrdinal("tipo_delito")),
-                    es_prevenible = dataReader.GetChar(dataReader.GetOrdinal("es_prevenible")),
+                    es_prevenible = dataReader.GetBoolean(dataReader.GetOrdinal("es_prevenible")),
 
                 });
             }

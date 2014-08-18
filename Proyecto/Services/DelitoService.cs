@@ -27,7 +27,7 @@ namespace Proyecto.Services
 
         public static List<Delito> GetAll()
         {
-            return ProviderService.ExecuteReaderDelito("SELECT delito id, tipo_delito, es_prevenible FROM DELITO ORDER BY 1 ASC");
+            return ProviderService.ExecuteReaderDelito("SELECT id, tipo_delito, es_prevenible FROM delitos ORDER BY 1 ASC");
         }
 
 
