@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using Npgsql;
 using Proyecto.Models;
+using Proyecto.Services;
 
 namespace Proyecto.Service
 {
-    public class ProviderService
+    public class ProviderService:IProviderService
     {
         const string ConnectionString = "server=192.168.0.9;port=5432;database=Proyecto;user id=postgres; Password=postgres";
 
-        public static bool ExecuteNonQuery(string comando)
+        public bool ExecuteNonQuery(string comando)
         {
             var conn = new NpgsqlConnection(ConnectionString);
             conn.Open();
@@ -18,9 +19,9 @@ namespace Proyecto.Service
             return filasCreadas == 1;
         }
 
-        public static List<Delito> ExecuteReaderDelito(string comando)
+        public List<TipoDelito> ExecuteReaderTipoDelito(string comando)
         {
-            var lista = new List<Delito>();
+            var lista = new List<TipoDelito>();
             var conn = new NpgsqlConnection(ConnectionString);
             conn.Open();
             var command = new NpgsqlCommand(comando, conn);
@@ -28,11 +29,11 @@ namespace Proyecto.Service
 
             while (dataReader.Read())
             {
-                lista.Add(new Delito()
+                lista.Add(new TipoDelito()
                 {
-                    id = dataReader.GetInt32(dataReader.GetOrdinal("id")),
-                    tipo_delito = dataReader.GetInt32(dataReader.GetOrdinal("tipo_delito")),
-                    es_prevenible = dataReader.GetBoolean(dataReader.GetOrdinal("es_prevenible")),
+                    Id = dataReader.GetInt32(dataReader.GetOrdinal("id")),
+                    Nombre = dataReader.GetInt32(dataReader.GetOrdinal("nombre")),
+                    EsPrevenible = dataReader.GetBoolean(dataReader.GetOrdinal("esPrevenible")),
 
                 });
             }

@@ -7,11 +7,20 @@ using Proyecto.Service;
 
 namespace Proyecto.Services
 {
-    public class EventoService
+    public class EventoService:IEventoService
     {
-        public static bool AltaEvento(Evento evento)
+
+        public readonly IProviderService _providerService;
+        //
+        // GET: /TipoDelito/
+        public EventoService(IProviderService providerService)
         {
-            return ProviderService.ExecuteNonQuery(String.Format(@"INSERT INTO evento (the_geom, fecha, denunciante, victimas, detalle, tipo_delito, direccion) VALUES (ST_GeomFromText('POINT({0} {1})', 4326)), '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", evento.longitud, evento.latitud,evento.fecha, evento.denunciante, evento.victimas, evento.detalle, evento.tipo_delito, evento.direccion));
+            _providerService = providerService;
+        }
+
+        public bool AltaEvento(Evento evento)
+        {
+            return _providerService.ExecuteNonQuery(String.Format(@"INSERT INTO evento (the_geom, fecha, denunciante, victimas, detalle, tipo_delito, direccion) VALUES (ST_GeomFromText('POINT({0} {1})', 4326)), '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", evento.Longitud, evento.Latitud,evento.Fecha, evento.Denunciante, evento.Victimas, evento.Detalle, evento.TipoDelito, evento.Direccion));
         }
     }
 }

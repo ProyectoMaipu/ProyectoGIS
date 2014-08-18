@@ -7,14 +7,15 @@ namespace Proyecto.Models
 {
     public class Evento
     {
-        public int id { get; set; }
-        public string longitud { get; set; }
-        public string latitud { get; set; }
-        public string fecha { get; set; }
-        public string denunciante { get; set; }
-        public string victimas { get; set; }
-        public string detalle { get; set; }
-        public int tipo_delito { get; set; }
-        public string direccion { get; set; }
+        public int Id { get; set; }
+        public string Longitud { get; set; }
+        public string Latitud { get; set; }
+        public string Fecha { get; set; }
+        public string Denunciante { get; set; }
+        public string Victimas { get; set; }
+        public string Detalle { get; set; }
+        public int TipoDelitoId { get; set; }
+        public TipoDelito TipoDelito { get; set; }
+        public string Direccion { get; set; }
     }
 }

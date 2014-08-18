@@ -4,17 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.ViewModels;
+using Proyecto.Services;
 
 namespace Proyecto.Controllers
 {
     public class EventoController : Controller
     {
-        //
-        // GET: /Evento/
+        public readonly ITipoDelitoService _delitoService;
+        public readonly IEventoService _eventoService;
+
+        public EventoController(ITipoDelitoService delitoService,IEventoService eventoService)
+        {
+            _delitoService = delitoService;
+            _eventoService = eventoService;
+        }
 
         public ActionResult Index()
         {
-            var viewModel = new GeoViewModel();
+            var viewModel = new EventoViewModel();
+            viewModel.TiposDelitos = _delitoService.GetAll();
             return View(viewModel);
         }
 

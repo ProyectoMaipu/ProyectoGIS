@@ -8,30 +8,34 @@ using System.Web.Mvc;
 
 namespace Proyecto.Controllers
 {
-    public class DelitoController : Controller
+    public class TipoDelitoController : Controller
     {
+        public readonly ITipoDelitoService _tipoDelitoService;
         //
-        // GET: /Delito/
+        // GET: /TipoDelito/
+        public TipoDelitoController(TipoDelitoService tipoDelitoService)
+        {
+            _tipoDelitoService = tipoDelitoService;
+        }
 
         public ActionResult Index()
         {
-            var caca = DelitoService.GetAll();
             return View();
         }
 
-        public ActionResult AltaDelito(Delito delito)
+        public ActionResult AltaTipoDelito(TipoDelito TipoDelito)
         {
-            return Json(DelitoService.AltaDelito(delito), JsonRequestBehavior.AllowGet);
+            return Json(_tipoDelitoService.AltaTipoDelito(TipoDelito), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult BajaDelito(Delito delito)
+        public ActionResult BajaTipoDelito(TipoDelito TipoDelito)
         {
-            return Json(DelitoService.BajaDelito(delito.id), JsonRequestBehavior.AllowGet);
+            return Json(_tipoDelitoService.BajaTipoDelito(TipoDelito.Id), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ActualizarDelito(Delito delito)
+        public ActionResult ActualizarTipoDelito(TipoDelito TipoDelito)
         {
-            return Json(DelitoService.ActualizarDelito(delito), JsonRequestBehavior.AllowGet);
+            return Json(_tipoDelitoService.ActualizarTipoDelito(TipoDelito), JsonRequestBehavior.AllowGet);
         }
 
     }
