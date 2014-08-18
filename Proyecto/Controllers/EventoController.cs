@@ -10,19 +10,20 @@ namespace Proyecto.Controllers
 {
     public class EventoController : Controller
     {
-        public readonly ITipoDelitoService _delitoService;
-        public readonly IEventoService _eventoService;
+        //public readonly ITipoDelitoService _delitoService;
+        //public readonly IEventoService _eventoService;
 
-        public EventoController(ITipoDelitoService delitoService,IEventoService eventoService)
-        {
-            _delitoService = delitoService;
-            _eventoService = eventoService;
-        }
+        //public EventoController()
+        //{
+        //    _delitoService = new ITipoDelitoService();
+        //    _eventoService = new IEventoService();
+        //}
 
         public ActionResult Index()
         {
             var viewModel = new EventoViewModel();
-            viewModel.TiposDelitos = _delitoService.GetAll();
+            var delitoService = new TipoDelitoService();
+            viewModel.TiposDelitos = delitoService.GetAll();
             return View(viewModel);
         }
 

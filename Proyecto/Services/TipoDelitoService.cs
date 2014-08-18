@@ -11,11 +11,11 @@ namespace Proyecto.Services
     public class TipoDelitoService:ITipoDelitoService
     {
              public readonly IProviderService _providerService;
-        //
-        // GET: /TipoDelito/
-        public TipoDelitoService(IProviderService providerService)
+        ////
+        //// GET: /TipoDelito/
+        public TipoDelitoService()
         {
-            _providerService = providerService;
+           var _providerService = new ProviderService();
         }
 
         public bool AltaTipoDelito(TipoDelito tipoDelito)
@@ -35,6 +35,7 @@ namespace Proyecto.Services
 
         public  List<TipoDelito> GetAll()
         {
+            var _providerService = new ProviderService();
             return _providerService.ExecuteReaderTipoDelito("SELECT id, nombre, esprevenible FROM tipodelitos ORDER BY 1 ASC");
         }
 

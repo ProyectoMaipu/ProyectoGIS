@@ -32,7 +32,7 @@ namespace Proyecto.Service
                 lista.Add(new TipoDelito()
                 {
                     Id = dataReader.GetInt32(dataReader.GetOrdinal("id")),
-                    Nombre = dataReader.GetInt32(dataReader.GetOrdinal("nombre")),
+                    Nombre = dataReader.GetString(dataReader.GetOrdinal("nombre")),
                     EsPrevenible = dataReader.GetBoolean(dataReader.GetOrdinal("esPrevenible")),
 
                 });

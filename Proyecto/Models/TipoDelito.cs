@@ -8,7 +8,7 @@ namespace Proyecto.Models
     public class TipoDelito
     {
         public int Id { get; set; }
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
         public bool EsPrevenible { get; set; }
     }
 }
