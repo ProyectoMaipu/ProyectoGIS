@@ -20,7 +20,9 @@ namespace Proyecto.Services
 
         public bool AltaEvento(Evento evento)
         {
-            return _providerService.ExecuteNonQuery(String.Format(@"INSERT INTO evento (the_geom, fecha, denunciante, victimas, detalle, tipo_delito, direccion) VALUES (ST_GeomFromText('POINT({0} {1})', 4326)), '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", evento.Longitud, evento.Latitud,evento.Fecha, evento.Denunciante, evento.Victimas, evento.Detalle, evento.TipoDelito, evento.Direccion));
+            var _providerService = new ProviderService();
+            var fechaParseada = String.Format("{0:yyyy-MM-dd HH:mm:ss}", evento.Fecha);
+            return _providerService.ExecuteNonQuery(String.Format(@"INSERT INTO eventos (the_geom, fecha, denunciante, victimas, detalle, tipodelito, direccion) VALUES (ST_GeomFromText('POINT({0} {1})', 4326), '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", evento.Longitud, evento.Latitud, fechaParseada, evento.Denunciante, evento.Victimas, evento.Detalle, evento.TipoDelitoId, evento.Direccion));
         }
     }
 }

@@ -16,6 +16,9 @@
 @using (Html.BeginForm("GuardarEvento","Evento",FormMethod.Post,new{id="altaForm"})){
 
 @Html.ValidationSummary()
+@Html.HiddenFor(m=>m.Id)
+@Html.HiddenFor(m=>m.Longitud)
+@Html.HiddenFor(m=>m.Latitud)
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -33,7 +36,7 @@
             @Html.LabelFor(m => m.Fecha)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Fecha, new { name = "Direccion", id = "Direccion" })
+            @Html.TextBoxFor(m => m.Fecha, new { name = "Fecha", id = "Fecha" })
         </div>
                  <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Fecha)
@@ -44,7 +47,7 @@
             @Html.LabelFor(m => m.Victimas)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Victimas, new { name = "Direccion", id = "Direccion" })
+            @Html.TextBoxFor(m => m.Victimas, new { name = "Victimas", id = "Victimas" })
         </div>
     <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Victimas)
@@ -55,7 +58,7 @@
             @Html.LabelFor(m => m.Denunciante)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Denunciante, new { name = "Direccion", id = "Direccion" })
+            @Html.TextBoxFor(m => m.Denunciante, new { name = "Denunciante", id = "Denunciante" })
         </div>
             <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Denunciante)
@@ -77,7 +80,7 @@
             @Html.LabelFor(m => m.Detalle)
         </div>
         <div class="col-md-5">
-            @Html.TextAreaFor(m=>m.Detalle, new { name = "Direccion", id = "Direccion" })
+            @Html.TextAreaFor(m=>m.Detalle, new { name = "Detalle", id = "Detalle" })
         </div>
             <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Detalle)
@@ -100,18 +103,19 @@
         autocomplete = new google.maps.places.Autocomplete(input, options);
         var mapOptions = {
             center: new google.maps.LatLng(-35.173728, -58.234451),
-            radius:20000,
+            radius: 20000,
             zoom: 14,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
-    }
-
-    $('#Direccion').on('change')
-    {
-
-    }
-
+    };
+    debugger;
+        $('#Direccion').change(function () {
+            //if (google.maps.autocomplete != undefined) {
+                $('#Latitud').val(autocomplete.getPlace().geometry.location.lat());
+                $('#Longitud').val(autocomplete.getPlace().geometry.location.lng());
+            //}s
+        });
     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 

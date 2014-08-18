@@ -10,7 +10,7 @@ namespace Proyecto.Models
         public int Id { get; set; }
         public string Longitud { get; set; }
         public string Latitud { get; set; }
-        public string Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public string Denunciante { get; set; }
         public string Victimas { get; set; }
         public string Detalle { get; set; }
