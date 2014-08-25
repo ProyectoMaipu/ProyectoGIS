@@ -7,7 +7,7 @@ namespace Proyecto.Service
 {
     public class ProviderService:IProviderService
     {
-        const string ConnectionString = "server=192.168.0.7;port=5432;database=Proyecto;user id=postgres; Password=postgres";
+        const string ConnectionString = "server=192.168.0.6;port=5432;database=Proyecto;user id=postgres; Password=postgres";
 
         public bool ExecuteNonQuery(string comando)
         {

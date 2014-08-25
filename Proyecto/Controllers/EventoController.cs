@@ -36,10 +36,10 @@ namespace Proyecto.Controllers
 
         public ActionResult Alta()
         {
-            Mapper.CreateMap<Evento, EventoViewModel>();
+            //Mapper.CreateMap<Evento, EventoViewModel>();
             var viewModel = new EventoViewModel();
             var delitoService = new TipoDelitoService();
-            viewModel=Mapper.Map<EventoViewModel>(new Evento());
+            //viewModel=Mapper.Map<EventoViewModel>(new Evento());
             viewModel.TiposDelitos = delitoService.GetAll();
             return View(viewModel);
         }

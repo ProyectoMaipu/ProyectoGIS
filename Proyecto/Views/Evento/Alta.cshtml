@@ -5,13 +5,22 @@
 @*<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>*@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCnVvFIubOsXOOIAcnQx0weuImKVpo6h_4&sensor=false"></script>
 
-<div id="mapa" style="height:500px;width:500px; "></div>
-<script src="/Scripts/jquery-1.9.1.js"></script>
-<script src="/Scripts/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/datepicker3.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+<link href="/Content/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="/Content/bootstrap-datepicker.css"> 
 
-<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+<script src="/Scripts/jquery-1.9.1.js"></script>
+<script src="/Scripts/jquery-ui-1.11.1.js"></script>
+<script src="/Scripts/bootstrap.min.js"></script>
+<script src="/Scripts/moment.min.js"></script>
+<script src="/Scripts/less-1.5.1.min.js"></script>
+<script src="/Scripts/bootstrap-datetimepicker.js"></script>
+
+
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+<div id="mapa" style="height:500px;width:500px; "></div>
 
 @using (Html.BeginForm("GuardarEvento","Evento",FormMethod.Post,new{id="altaForm"})){
 
@@ -25,19 +34,24 @@
             @Html.LabelFor(m => m.Direccion)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Direccion, new { name = "Direccion", id = "Direccion" })
+            @Html.TextBoxFor(m => m.Direccion, new { name = "Direccion", id = "Direccion",@class="form-control" })
         </div>
          <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Direccion)
      </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 ">
             @Html.LabelFor(m => m.Fecha)
         </div>
-        <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Fecha, new { name = "Fecha", id = "Fecha" })
+        <div class="col-md-5 ">
+            @Html.TextBoxFor(m => m.Fecha, new { name = "Fecha", id = "fechapicker",@class="form-control" })
+                <div class="row">
+   @*        <span class="input-group-addon add-on">
+          <i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
+             </span>*@
         </div>
+                 </div>
                  <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Fecha)
      </div>
@@ -47,7 +61,7 @@
             @Html.LabelFor(m => m.Victimas)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Victimas, new { name = "Victimas", id = "Victimas" })
+            @Html.TextBoxFor(m => m.Victimas, new { name = "Victimas", id = "Victimas",@class="form-control" })
         </div>
     <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Victimas)
@@ -58,7 +72,7 @@
             @Html.LabelFor(m => m.Denunciante)
         </div>
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.Denunciante, new { name = "Denunciante", id = "Denunciante" })
+            @Html.TextBoxFor(m => m.Denunciante, new { name = "Denunciante", id = "Denunciante",@class="form-control" })
         </div>
             <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Denunciante)
@@ -69,7 +83,7 @@
             @Html.LabelFor(m => m.TipoDelitoId)
         </div>
         <div class="col-md-5">
-            @Html.DropDownListFor(m => m.TipoDelitoId, new SelectList(Model.TiposDelitos, "Id", "Nombre", Model.TipoDelitoId), new { })
+            @Html.DropDownListFor(m => m.TipoDelitoId, new SelectList(Model.TiposDelitos, "Id", "Nombre", Model.TipoDelitoId), new { @class="form-control"})
         </div>
     <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.TipoDelitoId)
@@ -80,7 +94,7 @@
             @Html.LabelFor(m => m.Detalle)
         </div>
         <div class="col-md-5">
-            @Html.TextAreaFor(m=>m.Detalle, new { name = "Detalle", id = "Detalle" })
+            @Html.TextAreaFor(m=>m.Detalle, new { name = "Detalle", id = "Detalle",@class="form-control" })
         </div>
             <div class="col-md-5">
              @Html.ValidationMessageFor(m=>m.Detalle)
@@ -90,8 +104,9 @@
     
     <button type="submit" value="Guardar" name="Guardar">Guardar Evento</button>
 }
-
-<script type="text/JavaScript">
+<iframe style="border: none;" height="600" width="800" src="http://192.168.0.6:8080/geoexplorer/viewer/#maps/3"></iframe>
+<script>
+    $('#fechapicker').datetimepicker();
     var geocoder, map, bounds, markers, lastMarker, temporal;
     function initialize() {
         var input = document.getElementById('Direccion');
@@ -109,13 +124,14 @@
         };
         map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
     };
-    debugger;
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    $( document ).ready(function() {
         $('#Direccion').change(function () {
-            //if (google.maps.autocomplete != undefined) {
                 $('#Latitud').val(autocomplete.getPlace().geometry.location.lat());
                 $('#Longitud').val(autocomplete.getPlace().geometry.location.lng());
-            //}s
         });
-    google.maps.event.addDomListener(window, 'load', initialize);
+    });
+
     </script>
 
