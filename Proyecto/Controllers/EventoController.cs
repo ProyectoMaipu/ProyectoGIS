@@ -27,7 +27,6 @@ namespace Proyecto.Controllers
             var viewModel = new EventoViewModel();
             var delitoService = new TipoDelitoService();
             viewModel.TiposDelitos = delitoService.GetAll();
-
             return View(viewModel);
         }
 
@@ -36,10 +35,8 @@ namespace Proyecto.Controllers
 
         public ActionResult Alta()
         {
-            //Mapper.CreateMap<Evento, EventoViewModel>();
             var viewModel = new EventoViewModel();
             var delitoService = new TipoDelitoService();
-            //viewModel=Mapper.Map<EventoViewModel>(new Evento());
             viewModel.TiposDelitos = delitoService.GetAll();
             return View(viewModel);
         }
@@ -78,7 +75,7 @@ namespace Proyecto.Controllers
         //
         // GET: /Evento/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Consulta()
         {
             return View();
         }
@@ -96,12 +93,13 @@ namespace Proyecto.Controllers
                 {
                     Mapper.CreateMap<EventoViewModel, Evento>();
                     var evento = Mapper.Map<Evento>(vm);
+                    evento.Geom = "ST_GeomFromText('POINT({" + evento.Longitud + "} {" + evento.Latitud + "})', 4326)";
                     var eService = new EventoService();
                     eService.AltaEvento(evento);
                     // TODO: Add update logic here
                     var delitoService = new TipoDelitoService();
                     vm.TiposDelitos = delitoService.GetAll();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Consulta");
                 }
                 catch
                 {

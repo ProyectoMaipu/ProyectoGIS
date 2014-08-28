@@ -15,10 +15,12 @@ namespace Proyecto.ViewModels
         public string Denunciante { get; set; }
         public string Victimas { get; set; }
         public string Detalle { get; set; }
+        public string Imputados { get; set; }
         public List<TipoDelito> TiposDelitos { get; set; }
         [Display(Name = "Tipo de Delito")]
         public int? TipoDelitoId { get; set; }
         public string Longitud { get; set; }
         public string Latitud { get; set; }
+        public string Geom { get; set; }
     }
 }

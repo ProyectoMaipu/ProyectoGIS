@@ -413,6 +413,7 @@
     <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Views\Delito\AltaDelito.cshtml" />
     <Content Include="Views\Evento\Alta.cshtml" />
+    <Content Include="Views\Evento\Consulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

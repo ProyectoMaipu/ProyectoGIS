@@ -74,8 +74,19 @@
         <div class="col-md-5">
             @Html.TextBoxFor(m => m.Denunciante, new { name = "Denunciante", id = "Denunciante",@class="form-control" })
         </div>
+        <div class="col-md-5">
+            @Html.ValidationMessageFor(m=>m.Denunciante)
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Imputados)
+        </div>
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Imputados, new { name = "Imputados", id = "Imputados",@class="form-control" })
+        </div>
             <div class="col-md-5">
-             @Html.ValidationMessageFor(m=>m.Denunciante)
+             @Html.ValidationMessageFor(m=>m.Imputados)
      </div>
     </div>
     <div class="row">
