@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Proyecto.ViewModels;
+using Proyecto.DataAccess;
 using Proyecto.Services;
+using Proyecto.ViewModels;
 using AutoMapper;
 using Proyecto.Models;
 using System.Globalization;
+using TipoDelitoService = Proyecto.Services.TipoDelitoService;
 
 namespace Proyecto.Controllers
 {
@@ -93,9 +95,11 @@ namespace Proyecto.Controllers
                 {
                     Mapper.CreateMap<EventoViewModel, Evento>();
                     var evento = Mapper.Map<Evento>(vm);
-                    evento.Geom = "ST_GeomFromText('POINT({" + evento.Longitud + "} {" + evento.Latitud + "})', 4326)";
-                    var eService = new EventoService();
-                    eService.AltaEvento(evento);
+                    evento.TheGeom = "ST_GeomFromText('POINT({" + evento.Longitud + "} {" + evento.Latitud + "})', 4326)";
+                    //evento.TheGeom = "0101000020E61000009D853DEDF01D4DC0B9252834FF9541C0";
+                    //evento.Id = null;
+                    EventosService eService = getEventosService();
+                    eService.CreateEvento(evento);
                     // TODO: Add update logic here
                     var delitoService = new TipoDelitoService();
                     vm.TiposDelitos = delitoService.GetAll();
@@ -116,6 +120,15 @@ namespace Proyecto.Controllers
             }
         }
 
+
+        private EventosService getEventosService()
+        {
+            EventosService carService = new EventosService();
+            carService.SetSession(ApplicationCore.Instance.SessionFactory.OpenSession());
+
+            return carService;
+        }
+ 
         //
         // GET: /Evento/Delete/5
 

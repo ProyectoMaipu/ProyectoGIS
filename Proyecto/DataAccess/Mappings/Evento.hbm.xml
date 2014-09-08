@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping  assembly="Proyecto" namespace="Proyecto.Models"   xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Evento" table="eventos" lazy="true" >
+    <id name="Id" column="id" /> 
+    <property name="TipoDelito">
+      <column name="tipodelito" sql-type="integer" not-null="false" />
+    </property>
+    <property name="Imputados">
+      <column name="imputados" sql-type="text" not-null="false" />
+    </property>
+    <property name="TheGeom">
+      <column name="the_geom" sql-type="USER-DEFINED" not-null="false" />
+    </property>
+    <property name="Fecha">
+      <column name="fecha" sql-type="timestamp without time zone" not-null="false" />
+    </property>
+    <property name="Denunciante">
+      <column name="denunciante" sql-type="text" not-null="false" />
+    </property>
+    <property name="Victimas">
+      <column name="victimas" sql-type="text" not-null="false" />
+    </property>
+    <property name="Detalle">
+      <column name="detalle" sql-type="text" not-null="false" />
+    </property>
+    <property name="Direccion">
+      <column name="direccion" sql-type="text" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

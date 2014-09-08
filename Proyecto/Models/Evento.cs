@@ -7,17 +7,16 @@ namespace Proyecto.Models
 {
     public class Evento
     {
-        public int Id { get; set; }
-        public string Longitud { get; set; }
-        public string Latitud { get; set; }
-        public string Imputados { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Denunciante { get; set; }
-        public string Victimas { get; set; }
-        public string Detalle { get; set; }
-        public int TipoDelitoId { get; set; }
-        public TipoDelito TipoDelito { get; set; }
-        public string Direccion { get; set; }
-        public string Geom { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Longitud { get; set; }
+        public virtual string Latitud { get; set; }
+        public virtual string Imputados { get; set; }
+        public virtual DateTime Fecha { get; set; }
+        public virtual string Denunciante { get; set; }
+        public virtual string Victimas { get; set; }
+        public virtual string Detalle { get; set; }
+        public virtual int TipoDelito { get; set; }
+        public virtual string Direccion { get; set; }
+        public virtual string TheGeom { get; set; }
     }
 }

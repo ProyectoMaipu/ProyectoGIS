@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NHibernate.Cfg;
+using Proyecto.DataAccess;
 
 namespace Proyecto
 {
@@ -23,6 +25,9 @@ namespace Proyecto
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            Configuration configuration = new Configuration();
+            configuration.Configure();
+            ApplicationCore.Instance.SessionFactory = configuration.BuildSessionFactory();
         }
     }
 }
