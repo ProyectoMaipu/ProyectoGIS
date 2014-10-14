@@ -26,5 +26,11 @@
     <property name="Direccion">
       <column name="direccion" sql-type="text" not-null="false" />
     </property>
+    <property name="Latitud">
+      <column name="latitud" sql-type="text" not-null="false" />
+    </property>
+    <property name="Longitud">
+      <column name="longitud" sql-type="text" not-null="false" />
+    </property>
   </class>
 </hibernate-mapping>
