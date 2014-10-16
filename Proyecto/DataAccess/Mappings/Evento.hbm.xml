@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping  assembly="Proyecto" namespace="Proyecto.Models"   xmlns="urn:nhibernate-mapping-2.2">
   <class name="Evento" table="eventos" lazy="true" >
-    <id name="Id" column="id" /> 
+    <id name="Id" column="id"> 
+      <generator class="sequence-identity">
+                 <param name="sequence">eventos_id_seq</param>
+      </generator>
+    </id> 
     <property name="TipoDelito">
       <column name="tipodelito" sql-type="integer" not-null="false" />
     </property>

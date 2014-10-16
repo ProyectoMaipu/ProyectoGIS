@@ -95,7 +95,7 @@ namespace Proyecto.Controllers
                 {
                     Mapper.CreateMap<EventoViewModel, Evento>();
                     var evento = Mapper.Map<Evento>(vm);
-                    evento.TheGeom = "ST_GeomFromText('POINT({" + evento.Longitud + "} {" + evento.Latitud + "})', 4326)";
+                    //evento.TheGeom = "ST_GeomFromText('POINT({" + evento.Longitud + "} {" + evento.Latitud + "})', 4326)";
                     //evento.TheGeom = "0101000020E61000009D853DEDF01D4DC0B9252834FF9541C0";
                     //evento.Id = null;
                     EventosService eService = getEventosService();
